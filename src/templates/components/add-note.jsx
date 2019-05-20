@@ -22,6 +22,12 @@ class AddNote extends Component {
             .then((res) => {
                 this.props.updateData();
             })
+
+        this.setState({
+            title: '',
+            subtitle: '',
+            content: ''
+        })
     }
     render() { 
         return (
@@ -30,21 +36,21 @@ class AddNote extends Component {
                     <Form tag='form' onSubmit={this._handleSubmit}>
                         <FormGroup>
                             <Label>Title</Label>
-                            <Input type='text' name='title' placeholder='Title' onChange={this._handleInputChange} />
+                            <Input type='text' value={this.state.title} name='title' placeholder='Title' onChange={this._handleInputChange} />
                         </FormGroup>
                         <br />
                         <FormGroup>
                             <Label>Subtitle</Label>
-                            <Input type='text' name='subtitle' placeholder='Subtitle' onChange={this._handleInputChange} />
+                            <Input type='text' value={this.state.subtitle} name='subtitle' placeholder='Subtitle' onChange={this._handleInputChange} />
                         </FormGroup>
                         <br />
                         <FormGroup>
                             <Label>Content</Label>
-                            <Input type='textarea' name='content' placeholder='Content' onChange={this._handleInputChange} />
+                            <Input type='textarea' value={this.state.content} name='content' placeholder='Content' onChange={this._handleInputChange} />
                         </FormGroup>
                         <br />
                         <FormGroup>
-                            <Button type='submit' color='secondary'>Submit</Button>
+                            <Button type='submit' color='success'>Submit</Button>
                         </FormGroup>
                     </Form>
                 </CardBody>
