@@ -31,6 +31,14 @@ class Home extends Component {
         .catch(console.error);
     }
 
+    _deleteNote(id) {
+        Axios.delete(`http://localhost:3000/notes/${id}`)
+        .then((res) => {
+            this._updateNoteData();
+        })
+        .catch(console.error);
+    }
+
     render() {
         return (
         <Container className='pt-5 pb-5'>
@@ -46,7 +54,7 @@ class Home extends Component {
                 }
                 <Col md='6' sm='12'>
                     {   this.state.notes.map((note, i) => (
-                            <Note key={i} note={note} />
+                            <Note key={i} note={note} deleteNote={this._deleteNote.bind(this)} />
                         ))
                     }
                 </Col>

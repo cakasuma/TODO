@@ -2,8 +2,7 @@ import React from 'react';
 import { Card, CardText, CardBody,
     CardTitle, CardSubtitle, Button } from 'reactstrap';
 
-const Note = ({ note }) => { 
-    console.log(note)
+const Note = ({ note, deleteNote }) => {
     return (
         <Card>
             <CardBody>
@@ -13,7 +12,7 @@ const Note = ({ note }) => {
                     {note.content}
                 </CardText>
                 <Button className='mr-2' color='info'>Update</Button>
-                <Button color='danger'>Delete</Button>
+                <Button color='danger' onClick={() => deleteNote(note._id)}>Delete</Button>
             </CardBody>
         </Card>
     );
