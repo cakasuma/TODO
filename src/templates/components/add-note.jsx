@@ -10,6 +10,23 @@ class AddNote extends Component {
         content: ''
     };
 
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            if (this.props.note_id) {
+                Axios.get(`http://localhost:3000/notes/${this.props.note_id}`)
+                .then((res) => {
+                    const data = res.data;
+    
+                    this.setState({
+                        title: data.title,
+                        subtitle: data.subtitle,
+                        content: data.content
+                    })
+                })
+            }
+        }
+    }
+
     _handleInputChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
     }
@@ -18,10 +35,19 @@ class AddNote extends Component {
         e.preventDefault();
         const note = this.state;
 
-        Axios.post('http://localhost:3000/notes', qs.stringify(note))
-            .then((res) => {
-                this.props.updateData();
-            })
+        if (this.props.note_id) {
+            Axios.put(`http://localhost:3000/notes/${this.props.note_id}`, qs.stringify(note))
+                .then((res) => {
+                    this.props.updateData();
+                })
+        } else {
+            Axios.post('http://localhost:3000/notes', qs.stringify(note))
+                .then((res) => {
+                    this.props.updateData();
+                })
+        }
+
+
 
         this.setState({
             title: '',
