@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Note from '../components/note';
-import { Container, Row, Col, Button } from 'reactstrap';
+import { Container, Row, Col, Button, Spinner } from 'reactstrap';
 import AddNote from '../components/add-note';
 import Axios from 'axios'
 
 class Home extends Component {
     state = {
         notes: [],
-        note_update_id: '', 
+        note_update_id: '',
+        is_loading: true,
     }
 
     componentDidMount() {
@@ -19,7 +20,8 @@ class Home extends Component {
         .then((res) => {
             this.setState({
                 notes: res.data,
-                note_update_id: ''
+                note_update_id: '',
+                is_loading: false
             });
         })
         .catch(console.error);
@@ -55,12 +57,14 @@ class Home extends Component {
                     <AddNote note_id={this.state.note_update_id} updateData={this._updateNoteData.bind(this)} />
                     <Button className='w-100 my-2' color='danger' onClick={this._deleteNotes.bind(this)}>Clear All</Button>
                 </Col>
-                { !this.state.notes.length &&
-                    <Col className='pt-sm-2' md='6' sm='12'>
-                        <h2 className='text-muted text-center'>No data available at the moment</h2>
-                    </Col>
-                }
                 <Col md='6' sm='12'>
+                    {
+                        this.state.is_loading &&
+                        <Spinner className='text-center' type='grow' color='secondary' />
+                    }
+                    {   (!this.state.notes.length && !this.state.is_loading) &&
+                        <h2 className='text-muted text-center'>No data available at the moment</h2>
+                    }
                     {   this.state.notes.map((note, i) => (
                             <Note key={i} note={note} updateNote={this._updateNoteId.bind(this)} deleteNote={this._deleteNote.bind(this)} />
                         ))
