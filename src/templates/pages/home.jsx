@@ -45,10 +45,10 @@ class Home extends Component {
             <Row>
                 <Col md='6' sm='12'>
                     <Form updateData={this._updateNoteData.bind(this)} />
-                    <Button className='w-100 mt-2' color='danger' onClick={this._deleteNotes.bind(this)}>Clear All</Button>
+                    <Button className='w-100 my-2' color='danger' onClick={this._deleteNotes.bind(this)}>Clear All</Button>
                 </Col>
                 { !this.state.notes.length &&
-                    <Col md='6' sm='12'>
+                    <Col className='pt-sm-2' md='6' sm='12'>
                         <h2 className='text-muted text-center'>No data available at the moment</h2>
                     </Col>
                 }

@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 
 const Home2 = () => (
     <Container>
-        home2
+        test route redirect works
     </Container>
 )
 

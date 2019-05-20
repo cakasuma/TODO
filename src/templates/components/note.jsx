@@ -4,7 +4,7 @@ import { Card, CardText, CardBody,
 
 const Note = ({ note, deleteNote }) => {
     return (
-        <Card>
+        <Card className='mb-2'>
             <CardBody>
                 <CardTitle tag='h5'>{note.title}</CardTitle>
                 <CardSubtitle tag='h6' className='mb-2 text-muted'>{note.subtitle}</CardSubtitle>
