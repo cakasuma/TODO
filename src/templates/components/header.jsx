@@ -26,9 +26,9 @@ class Header extends Component {
 									Home
 								</Link>
 							</NavItem>
-							<NavItem active={this.props.location.pathname === routes.home2}>
-								<Link className='nav-link' to={routes.home2}>
-									Home2
+							<NavItem active={this.props.location.pathname === routes.pin}>
+								<Link className='nav-link' to={routes.pin}>
+									Pin
 								</Link>
 							</NavItem>
 						</Nav>

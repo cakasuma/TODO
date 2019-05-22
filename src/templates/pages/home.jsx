@@ -3,6 +3,7 @@ import Note from '../components/note';
 import { Container, Row, Col, Button, Spinner } from 'reactstrap';
 import AddNote from '../components/add-note';
 import Axios from 'axios'
+import qs from 'qs';
 
 class Home extends Component {
     state = {
@@ -49,6 +50,13 @@ class Home extends Component {
         });
     }
 
+    _updatePinned(id, pinned) {
+        Axios.put(`http://localhost:3000/notes/pin/${id}`, qs.stringify({ pinned: !pinned }))
+        .then((res) => {
+            this._updateNoteData();
+        })
+    }
+
     render() {
         return (
         <Container className='pt-5 pb-5'>
@@ -66,7 +74,7 @@ class Home extends Component {
                         <h2 className='text-muted text-center'>No data available at the moment</h2>
                     }
                     {   this.state.notes.map((note, i) => (
-                            <Note key={i} note={note} updateNote={this._updateNoteId.bind(this)} deleteNote={this._deleteNote.bind(this)} />
+                            <Note key={i} note={note} updatePin={this._updatePinned.bind(this)} updateNote={this._updateNoteId.bind(this)} deleteNote={this._deleteNote.bind(this)} />
                         ))
                     }
                 </Col>

@@ -47,8 +47,6 @@ class AddNote extends Component {
                 })
         }
 
-
-
         this.setState({
             title: '',
             subtitle: '',
